@@ -1,0 +1,24 @@
+Array
+(
+    [carrito] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 5
+                    [nombre] => Vestido gris
+                    [precio] => 23.992
+                    [imagen] => img/vestidogirs.jpg
+                    [talla] => L
+                    [cantidad] => 1
+                )
+
+        )
+
+    [clienteID] => 39
+    [metodoPago] => ContraEntrega
+    [nombre] => Jose Carlos
+    [correo] => jose@gmail.com
+    [carnet] => 45623184
+    [telefono] => 75315985
+    [direccion] => Ciudadela Universitaria UAGRM, Avenida Busch, Panamericano, Piraí, Santa Cruz de la Sierra, Provincia Andrés Ibáñez, Santa Cruz, Bolivia
+)

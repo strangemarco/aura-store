@@ -1,0 +1,606 @@
+/* Estilos Generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff0f5; /* lavanda claro */
+}
+
+/* Encabezado */
+header {
+    background-color: #d63384; /* rosa fuerte elegante */
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #ffb6c1; /* rosa claro */
+    color: #333;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #ffffff; /* fondo blanco limpio */
+    color: #333;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+.hero .btn {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #e75480; /* rosa fuerte */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.hero .btn:hover {
+    background-color: #ffb6c1; /* rosa claro al pasar el mouse */
+}
+
+/* Pie de página */
+footer {
+    background-color: #d63384;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.promociones {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #fffafd;
+}
+
+.promociones h2 {
+    font-size: 2em;
+    color: #d63384;
+    margin-bottom: 30px;
+}
+
+.promo-galeria {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.promo-galeria img {
+    width: 300px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.promo-galeria img:hover {
+    transform: scale(1.05);
+}
+
+.promo-card .descripcion {
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.5;
+    margin: 8px 0;
+    font-style: italic;
+}
+
+.promo-card .precio {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #d63384; /* rosa principal */
+    margin-bottom: 5px;
+}
+
+.promo-card .talla {
+    font-size: 0.95em;
+    color: #6c757d; /* gris suave */
+    margin-bottom: 10px;
+}
+.precio-original {
+    text-decoration: line-through;
+    color: #888;
+    margin-right: 8px;
+    font-size: 0.95em;
+}
+
+.precio-oferta {
+    color: #d63384;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+
+
+.agregar-carrito {
+    background-color: #d63384; /* rosa fuerte */
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.agregar-carrito:hover {
+    background-color: #e75480; /* tono más claro */
+    transform: scale(1.03);
+}
+
+.agregar-carrito::before {
+    content: "🛒";
+    font-size: 16px;
+}
+
+
+
+
+
+/* Estilos para sección de login */
+#login {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+#login h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+#login-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#login-form input[type="email"],
+#login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border 0.3s;
+}
+
+#login-form input:focus {
+    border-color: #d63384;
+    outline: none;
+}
+
+#login-form button {
+    width: 100%;
+    background-color: #d63384;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#login-form button:hover {
+    background-color: #d63384;
+}
+
+#login p {
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+}
+
+#login a {
+    color: #d63384;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#login a:hover {
+    text-decoration: underline;
+}
+
+
+/* Estilos para sección de registro */
+#registro {
+    max-width: 500px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#registro h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+#registro form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#registro form input[type="text"],
+#registro form input[type="email"],
+#registro form input[type="password"],
+#registro form input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border 0.3s;
+}
+
+#registro form input:focus {
+    border-color: #d63384;
+    outline: none;
+}
+
+#registro form button {
+    width: 100%;
+    background-color: #d63384;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#registro form button:hover {
+    background-color: #d63384;
+}
+
+/* ============================
+   CONTENEDOR PRINCIPAL
+============================ */
+#carrito-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+#carrito-container h2 {
+    color: #d63384;
+    margin-bottom: 20px;
+}
+
+/* ============================
+   LISTA DEL CARRITO
+============================ */
+.carrito-tabla ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.carrito-tabla li {
+    margin-bottom: 15px;
+}
+
+.carrito-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #ffe4ec;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .carrito-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carrito-detalle {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+  }
+  
+
+/* ============================
+   BOTÓN ELIMINAR PRODUCTO
+============================ */
+.eliminar-producto {
+    background-color: #ff4d6d;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.eliminar-producto:hover {
+    background-color: #cc0033;
+}
+
+/* ============================
+   RESUMEN Y TOTAL
+============================ */
+.carrito-resumen {
+    margin-top: 20px;
+}
+
+#total-carrito {
+    font-size: 18px;
+    font-weight: bold;
+    color: #d63384;
+    margin-bottom: 20px;
+}
+
+/* ============================
+   BOTONES DE ACCIÓN
+============================ */
+.carrito-botones {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+#vaciar-carrito,
+#realizar-compra {
+    background-color: #d63384;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#vaciar-carrito:hover,
+#realizar-compra:hover {
+    background-color: #e75480;
+    transform: scale(1.05);
+}
+
+
+
+section.productos {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.producto-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.producto-img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+
+
+.precio {
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.stock {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Sección de Contacto */
+#contacto {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+#contacto h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#contacto h3 {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Botón de WhatsApp */
+.whatsapp-button {
+    display: inline-block;
+    background-color: #25D366;
+    color: white;
+    font-weight: bold;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.whatsapp-button:hover {
+    background-color: #1ebe5d;
+    text-decoration: none;
+}
+
+
+
+
+#realizar-compra:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+
+.metodo-pago {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.metodo-pago select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+
+#qr-container img {
+    border: 2px dashed #d63384;
+    padding: 10px;
+    background-color: #fff0f5;
+    border-radius: 10px;
+}
+
+
+.metodo-pago select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+#formulario-metodo {
+    margin-top: 20px;
+}
+
+#formulario-metodo input, #formulario-metodo select {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.metodo-pago label,
+.form-tarjeta label,
+.form-transferencia label,
+.form-qr label,
+.form-direccion label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.metodo-pago input,
+.form-tarjeta input,
+.form-transferencia input,
+.form-qr input,
+.form-direccion input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.form-datos-cliente {
+    margin-top: 20px;
+  }
+  
+  .form-datos-cliente label,
+  .form-tarjeta label,
+  .form-transferencia label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .form-datos-cliente input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+

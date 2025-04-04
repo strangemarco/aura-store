@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Aura Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Aura Store</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Ofertas</a></li>
+                <li><a href="productos.php">Productos</a></li>
+                <li><a href="carrito.html">Carrito</a></li>
+                <li><a href="login.html">Iniciar Sesión</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+    
+    <section class="productos-tabla">
+        <h2>Lista de Productos</h2>
+        <div class="tabla-contenedor">
+            <table class="tabla-productos">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php include 'productos.php'; ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Aura Store - Todos los derechos reservados</p>
+    </footer>
+
+</body>
+</html>

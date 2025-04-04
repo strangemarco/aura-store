@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito - Aura Store</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />             
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>Aura Store</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">Ofertas</a></li>
+      <li><a href="productos.php">Productos</a></li>
+      <li><a href="carrito.html">Carrito</a></li>
+      <li><a href="login.html">Iniciar Sesión</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="gestion_entregas.php">Entregas</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="carrito-container">
+  <h2>Carrito de Compras</h2>
+  <ul id="lista-carrito" class="carrito-tabla"></ul>
+
+  <div class="carrito-resumen">
+    <p id="total-carrito">Total: $0.00</p>
+
+    <div class="metodo-pago">
+      <label for="metodoPago">Selecciona método de pago:</label>
+      <select id="metodoPago">
+        <option value="">-- Elige una opción --</option>
+        <option value="TarjetaCredito">Tarjeta de crédito</option>
+        <option value="TarjetaDebito">Tarjeta de débito</option>
+        <option value="Transferencia">Transferencia bancaria</option>
+        <option value="ContraEntrega">Pago contra entrega</option>
+        <option value="QR">QR</option>
+      </select>
+    </div>
+
+    <!-- Aquí se mostrará el formulario dinámico -->
+    <div id="formulario-metodo"></div>
+
+    <!-- QR opcional -->
+    <div id="qr-container" style="display: none; margin-top: 10px; text-align: center;">
+      <img src="img/QRCOMPRA.jpg" alt="QR de pago" style="width: 350px;" />
+      <p>Escanea para pagar</p>
+    </div>
+
+    <div class="carrito-botones">
+      <button id="vaciar-carrito">Vaciar Carrito</button>
+      <button id="realizar-compra">Realizar Compra</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Aura Store - Todos los derechos reservados</p>
+</footer>
+
+<script>
+  const metodoPagoSelect = document.getElementById("metodoPago");
+  const formularioMetodo = document.getElementById("formulario-metodo");
+  const qrContainer = document.getElementById("qr-container");
+
+  const datosEntrega = `
+    <label for="nombre">Nombre completo:</label>
+    <input type="text" id="nombre" placeholder="Nombre completo" required>
+
+    <label for="correo">Correo electrónico:</label>
+    <input type="email" id="correo" placeholder="ejemplo@correo.com" required>
+
+    <label for="carnet">N° de carnet:</label>
+    <input type="text" id="carnet" placeholder="N° de carnet" required>
+
+    <label for="telefono">Teléfono:</label>
+    <input type="text" id="telefono" placeholder="Teléfono" required>
+
+    <label for="direccion">Dirección de entrega:</label>
+    <input type="text" id="direccion" placeholder="Dirección de entrega" required>
+
+    <div id="mapa" style="height: 300px; margin-top: 10px; border: 1px solid #ccc;"></div>
+  `;
+
+  metodoPagoSelect.addEventListener("change", actualizarFormularioMetodo);
+  actualizarFormularioMetodo();
+
+  function actualizarFormularioMetodo() {
+    const metodo = metodoPagoSelect.value;
+    let html = "";
+    qrContainer.style.display = "none";
+
+    switch (metodo) {
+      case "TarjetaCredito":
+      case "TarjetaDebito":
+        html = `
+          <div class="form-tarjeta">
+            <label>Número de tarjeta:</label>
+            <input type="text" placeholder="1234 5678 9012 3456" required>
+
+            <label>Nombre del titular:</label>
+            <input type="text" placeholder="Nombre en la tarjeta" required>
+
+            <label>Fecha de expiración:</label>
+            <input type="month" required>
+
+            <label>Código CVV:</label>
+            <input type="text" maxlength="4" placeholder="123" required>
+
+            ${datosEntrega}
+          </div>
+        `;
+        break;
+
+      case "Transferencia":
+        html = `
+          <div class="form-transferencia">
+            <label>Banco:</label>
+            <input type="text" placeholder="Nombre del banco" required>
+
+            <label>Número de cuenta:</label>
+            <input type="text" placeholder="000123456789" required>
+
+            <label>Adjuntar comprobante:</label>
+            <input type="file" required>
+
+            ${datosEntrega}
+          </div>
+        `;
+        break;
+
+      case "QR":
+        qrContainer.style.display = "block";
+        html = `<div class="form-qr">${datosEntrega}</div>`;
+        break;
+
+      case "ContraEntrega":
+        html = `
+          <p>Pagas cuando recibas el producto.</p>
+          <div class="form-direccion">${datosEntrega}</div>
+        `;
+        break;
+
+      default:
+        html = "";
+    }
+
+    formularioMetodo.innerHTML = html;
+    setTimeout(() => {
+      if (document.getElementById("mapa")) inicializarMapa();
+    }, 200);
+  }
+
+  let mapa, marcador;
+  function inicializarMapa() {
+    const coordsIniciales = [-17.7833, -63.1821];
+    mapa = L.map("mapa").setView(coordsIniciales, 13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(mapa);
+
+    mapa.on("click", async function (e) {
+      const { lat, lng } = e.latlng;
+
+      if (marcador) {
+        marcador.setLatLng(e.latlng);
+      } else {
+        marcador = L.marker(e.latlng).addTo(mapa);
+      }
+
+      const respuesta = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`);
+      const datos = await respuesta.json();
+      const direccion = datos.display_name || `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+
+      const inputDireccion = document.getElementById("direccion");
+      if (inputDireccion) inputDireccion.value = direccion;
+    });
+  }
+</script>
+
+<script src="carrito.js"></script>
+
+<!-- Modal de confirmación -->
+<div id="modal-confirmacion" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); z-index:999;">
+  <div style="background:white; width:90%; max-width:400px; margin:10% auto; padding:30px; border-radius:8px; text-align:center; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
+    <h2 style="color:#e91e63;">¡Gracias por tu compra!</h2>
+    <p>Tu pedido ha sido registrado exitosamente.</p>
+    <button id="cerrarModalBtn" style="background:#28a745; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; margin-top:15px;">Cerrar</button>
+  </div>
+</div>
+
+<script>
+  function mostrarModal() {
+    document.getElementById("modal-confirmacion").style.display = "block";
+  }
+
+  function cerrarModal() {
+    document.getElementById("modal-confirmacion").style.display = "none";
+    location.href = "productos.php";
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const cerrarBtn = document.getElementById("cerrarModalBtn");
+    const modal = document.getElementById("modal-confirmacion");
+
+    cerrarBtn?.addEventListener("click", cerrarModal);
+    modal?.addEventListener("click", (e) => {
+      if (e.target === modal) cerrarModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") cerrarModal();
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciando sesión...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .spinner {
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-top: 5px solid #fff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>¡Bienvenido(a) a Aura Store!</h1>
+    <p>Estamos preparando tu sesión...</p>
+    <div class="spinner"></div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const clienteID = urlParams.get("cliente_id");
+
+    if (clienteID) {
+      localStorage.setItem("cliente_id", clienteID);
+      localStorage.setItem("usuario_logueado", "true");
+
+      // Redirige después de 2 segundos para mostrar la animación
+      setTimeout(() => {
+        window.location.href = "productos.php";
+      }, 2000);
+    } else {
+      alert("Error: no se pudo obtener ID de cliente.");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,1 +1,156 @@
-<h1>Aura Store</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head> 
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Aura Store</h1> 
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Ofertas</a></li>
+                    <li><a href="productos.php">Productos</a></li>
+                    <li><a href="carrito.html">Carrito</a></li>
+                    <li><a href="login.html">Iniciar Sesión</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="gestion_entregas.php">Entregas</a></li>
+                    
+
+                    
+                </ul>
+            </nav>
+      
+    </header>
+    
+<section class="promociones">
+    <h2>Ofertas de temporada</h2>
+    <div class="promo-galeria">
+
+        <div class="promo-card">
+            <img src="img/conjuntodeverano.jpg" alt="Conjunto de verano">
+            <h3>Conjunto de verano</h3>
+            <p class="descripcion">Conjunto de verano con estampado floral, ideal para días soleados.</p>
+            <p class="precio">
+                <span class="precio-original">$52.88</span>
+                <span class="precio-oferta">$39.99</span>
+            </p>
+            <p class="talla">Tallas disponibles: S, M, L</p>
+            <button class="agregar-carrito"
+                data-id="101"
+                data-nombre="Conjunto de verano"
+                data-precio="39.99"
+                data-imagen="img/conjuntodeverano.jpg">
+                Añadir al carrito
+            </button>
+        </div>
+
+        <div class="promo-card">
+            <img src="img/vestidogirs.jpg" alt="Blusa elegante">
+            <h3>Blusa elegante</h3>
+            <p class="descripcion">Blusa manga larga de seda, perfecta para eventos formales.</p>
+            <p class="precio">
+                <span class="precio-original">$45.50</span>
+                <span class="precio-oferta">$29.99</span>
+            </p>
+            <p class="talla">Tallas disponibles: M, L</p>
+            <button class="agregar-carrito"
+                data-id="102"
+                data-nombre="Blusa elegante"
+                data-precio="29.99"
+                data-imagen="img/vestidogirs.jpg">
+                Añadir al carrito
+            </button>
+        </div>
+
+        <div class="promo-card">
+            <img src="img/vestidorojo.jpg" alt="Chaqueta casual">
+            <h3>Chaqueta casual</h3>
+            <p class="descripcion">Chaqueta ligera estilo denim, ideal para el día a día.</p>
+            <p class="precio">
+                <span class="precio-original">$64.90</span>
+                <span class="precio-oferta">$49.99</span>
+            </p>
+            <p class="talla">Tallas disponibles: S, M, L, XL</p>
+            <button class="agregar-carrito"
+                data-id="103"
+                data-nombre="Chaqueta casual"
+                data-precio="49.99"
+                data-imagen="img/vestidorojo.jpg">
+                Añadir al carrito
+            </button>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+<footer>
+    <p>&copy; 2025 Aura Store - Todos los derechos reservados</p>
+</footer>
+<script src="carrito.js"></script> 
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    
+        document.addEventListener("click", (e) => {
+            if (e.target.classList.contains("agregar-carrito")) {
+                const producto = {
+                    id: e.target.dataset.id,
+                    nombre: e.target.dataset.nombre,
+                    precio: parseFloat(e.target.dataset.precio),
+                    cantidad: 1
+                };
+    
+                const existe = carrito.find(p => p.id === producto.id);
+                if (existe) {
+                    existe.cantidad++;
+                } else {
+                    carrito.push(producto);
+                }
+    
+                localStorage.setItem("carrito", JSON.stringify(carrito));
+                alert(`"${producto.nombre}" se añadió al carrito`);
+            }
+        });
+    });
+
+
+
+
+    
+    </script>
+    
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const iconoUsuario = document.getElementById("icono-usuario");
+            if (localStorage.getItem("usuario_logueado") === "true") {
+                iconoUsuario.style.display = "block";
+            }
+        });
+    </script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const rol = localStorage.setItem("rol", "Administrador");
+          // asegurate que el rol se guarde al iniciar sesión
+          const adminPanel = document.getElementById("admin-panel");
+      
+          if (rol === "Administrador") {
+            adminPanel.style.display = "inline-block";
+          }
+        });
+      </script>
+      
+
+</body>
+</html>
